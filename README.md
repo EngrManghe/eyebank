@@ -7,6 +7,6 @@ bla bla bla
 some text
 
 ## SOME TABLE
-row1 | row 2 | row 3 |
-data 1 | data2 | data 3 | 
-data 1 | data2 | data 3 |
+|row1 | row 2 | row 3|
+|data 1 | data2 | data 3| 
+|data 1 | data2 | data 3|
