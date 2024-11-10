@@ -1,13 +1,14 @@
 import os
 import requests
 import json
-from .env import load_dotenv
+import yaml
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from config.yaml file
+with open("config.yaml", "r") as file:
+    config = yaml.safe_load(file)
 
-# Get the API key from the .env file
-api_key = os.getenv("CHAT_GPT_API_KEY")
+# Get the API key from the config.yaml file
+api_key = config.get("CHAT_GPT_API_KEY")
 
 # Define the API endpoint and headers
 url = "https://api.openai.com/v1/chat/completions"
@@ -18,7 +19,9 @@ headers = {
 
 # Define the request payload
 data = {
-    "model": "gpt-4",  # or use the appropriate model name
+    #"model": "gpt-4",  # or use the appropriate model name
+    "model": "gpt-4-turbo",
+    #"model": "gpt-3.5-turbo",
     "messages": [{"role": "user", "content": "Hello, ChatGPT!"}]
 }
 
