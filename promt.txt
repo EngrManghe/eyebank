@@ -1,0 +1,2 @@
+Here should be the text which we send to chat GPT with you PDF file
+some kind of Cover Letter or you know what Promt it is (ok correct me if i was wrong) sorry
