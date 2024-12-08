@@ -40,7 +40,8 @@ def send_request(api_key, document_content, prompt):
     }
 
     data = {
-        "model": "gpt-4-turbo",
+        #"model": "gpt-4-turbo",
+        "model": "gpt-4o-mini",
         "messages": [
             {"role": "system", "content": "You are analyzing a document and responding to a prompt."},
             {"role": "user", "content": f"Document content:\n{document_content}\n\nPrompt:\n{prompt}"}

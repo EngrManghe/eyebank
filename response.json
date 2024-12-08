@@ -1,14 +1,14 @@
 {
-    "id": "chatcmpl-AUJg0Ne2YNT01pXBSne56vjT4ecw9",
+    "id": "chatcmpl-AcIDkfvTA1BAXUeNuvK9gmf9g0AQp",
     "object": "chat.completion",
-    "created": 1731788840,
-    "model": "gpt-4-turbo-2024-04-09",
+    "created": 1733689868,
+    "model": "gpt-4o-mini-2024-07-18",
     "choices": [
         {
             "index": 0,
             "message": {
                 "role": "assistant",
-                "content": "Hello! How can I assist you today?",
+                "content": "```json\n[\n    {\n        \"electronic_medical_records\": {\n            \"patient_details\": {\n                \"name\": \"Marjorie R Ellis\",\n                \"age\": 68,\n                \"medical_history\": [\n                    \"MASH Cirrhosis\",\n                    \"Hypertension\",\n                    \"GAD (Generalized Anxiety Disorder)\",\n                    \"Depression\",\n                    \"Obesity\",\n                    \"Lymphedema\",\n                    \"Recurrent UTIs\"\n                ],\n                \"hospital_course\": [\n                    \"Admitted on 10/01/2024\",\n                    \"Presented with altered mental status and sepsis due to MRDO Enterobacter UTI and hospital-acquired pneumonia\",\n                    \"Therapeutic interventions included broad-spectrum antibiotics: vancomycin and cefepime\",\n                    \"Transferred to MICU for airway management\",\n                    \"Died on 10/13/2024\"\n                ]\n            },\n            \"medications\": [\n                \"Cefepime\",\n                \"Vancomycin\",\n                \"Meropenem\",\n                \"Lactulose\",\n                \"Rifaximin\",\n                \"Sertraline\",\n                \"Levothyroxine\",\n                \"Cholecalciferol\",\n                \"Furosemide\",\n                \"Potassium Chloride\"\n            ],\n            \"hospital_discharge\": \"Expired on 10/13/2024 after complications from ongoing sepsis and multi-organ failure\"\n        },\n        \"sepsis\": {\n            \"cause\": \"Sepsis due to suspected multi-drug resistant infection with Enterobacter cloacae\",\n            \"complications\": [\n                \"Worsening altered mental status\",\n                \"Fever spikes and leukocytosis\",\n                \"Pulmonary infiltrates on chest X-ray suggestive of pneumonia\",\n                \"Progressive metabolic encephalopathy\"\n            ],\n            \"treatment\": [\n                \"Broad-spectrum intravenous antibiotics\",\n                \"Fluid resuscitation\",\n                \"Monitoring of vital signs and laboratory parameters\"\n            ],\n            \"status\": \"Sepsis with multi-organ dysfunction leading to death\"\n        },\n        \"blood_transfusion\": {\n            \"reason\": \"Severe anemia likely related to chronic illness and acute decompensation\",\n            \"hemoglobin_levels\": [\n                {\"date\": \"10/01/2024\", \"value\": \"8.1 g/dL\"},\n                {\"date\": \"10/03/2024\", \"value\": \"7.5 g/dL\"},\n                {\"date\": \"10/04/2024\", \"value\": \"6.2 g/dL\"}\n            ],\n            \"transfusions\": [\n                {\n                    \"date\": \"10/03/2024\",\n                    \"amount\": \"2 units of packed red blood cells\",\n                    \"target_hemoglobin\": \"> 7 g/dL due to severe anemia and illness\"\n                }\n\n            ]\n        }\n    }\n]\n```",
                 "refusal": null
             },
             "logprobs": null,
@@ -16,9 +16,9 @@
         }
     ],
     "usage": {
-        "prompt_tokens": 13,
-        "completion_tokens": 9,
-        "total_tokens": 22,
+        "prompt_tokens": 47008,
+        "completion_tokens": 586,
+        "total_tokens": 47594,
         "prompt_tokens_details": {
             "cached_tokens": 0,
             "audio_tokens": 0
@@ -30,5 +30,5 @@
             "rejected_prediction_tokens": 0
         }
     },
-    "system_fingerprint": "fp_5db30363ff"
+    "system_fingerprint": "fp_bba3c8e70b"
 }
