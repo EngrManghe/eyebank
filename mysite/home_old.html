@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage with Buttons</title>
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            background-color: #004B93;
+            width: 100%;
+            padding: 10px 20px;
+        }
+
+        .menu a {
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 30px;
+            padding: 10px 15px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #e3e3e3;
+        }
+
+        .content {
+            width: 606px;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(87, 26, 26, 0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .button-container div {
+            width: 200px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #004B93;
+            color: black;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container div:hover {
+            background-color: #003970;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown select {
+            width: 200px;
+            height: 60px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            background: #004B93;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown select:hover {
+            background-color: #003970;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="/home">HOME</a>
+        <a href="/registration">REGISTRATION</a>
+        <a href="/login">LOGIN</a>
+    </div>
+
+    <div class="content">
+        <div class="button-container">
+            <div onclick="window.location.href='/upload'">UPLOAD</div>
+            <div class="dropdown">
+                <select>
+                    <option disabled selected>LIST OF OPTIONS</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select>
+            </div>
+            <div onclick="window.location.href='/submit'">SUBMIT</div>
+        </div>
+    </div>
+</body>
+</html>
