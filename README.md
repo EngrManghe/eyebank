@@ -58,3 +58,14 @@ Go meeting on 21st December, or 22nd
 before that day
 1) Check our promt maybe you have some idea how to make it more compact
 2) Download Beyond and Compare app (very easy soft)
+
+Step #6
+We build 2 pages /home and /result
+
+Step #7
+We need to make corrections on our design little bit
+25/01
+
+Step #8
+Connect FrontEnd with BackEnd and Deploy into PythonAnywhere (where we already create an account and have an access to the machine)
+We will represent our project there
