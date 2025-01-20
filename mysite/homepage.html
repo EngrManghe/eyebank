@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion's Eye Bank - Donor Suitability System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo" class="logo">
+        <h1>Lion’s Eye Bank - Donor Suitability Assessment System</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <button onclick="navigate('home')">Home</button>
+        <button onclick="navigate('upload')">Upload Records</button>
+        <button onclick="navigate('results')">View Results</button>
+        <button onclick="navigate('contact')">Contact Us</button>
+    </nav>
+
+    <!-- Home Page -->
+    <main id="home-page">
+        <section class="intro">
+            <p>Streamline donor evaluation with our AI-driven framework. Upload medical records to assess suitability with accuracy and efficiency.</p>
+            <button onclick="uploadFile()">Upload Donor Records (PDF/JSON)</button>
+            <button onclick="showInstructions()">How to Use the System?</button>
+            <button onclick="login()">Login/Register</button>
+        </section>
+    </main>
+
+    <!-- Results Page -->
+    <main id="result-page" style="display: none;">
+        <section class="results">
+            <h2>Processed Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Donor Name</th>
+                        <th>Eligibility Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Eligible</td>
+                        <td>No issues detected.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="downloadReport()">Download Detailed Report (PDF)</button>
+            <button onclick="provideFeedback()">Provide Feedback on Results</button>
+            <input type="text" placeholder="Search Previous Records">
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Lion’s Eye Bank of West Central Ohio</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </footer>
+</body>
+</html>
