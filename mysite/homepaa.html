@@ -59,39 +59,6 @@
             padding: 20px;
         }
 
-        button {
-            padding: 10px 15px;
-            background-color: #004d61;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #003d50;
-        }
-
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .results-table th, .results-table td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
-        .results-table th {
-            background-color: #004d61;
-            color: white;
-        }
-
         .important-criteria {
             margin-top: 20px;
             padding: 20px;
@@ -112,6 +79,38 @@
         .important-criteria ul li {
             margin-bottom: 10px;
             font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #004d61;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #004d61;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #003d50;
         }
 
         footer {
@@ -146,83 +145,86 @@
     <!-- Home Page -->
     <main id="home-page">
         <h2>Welcome to the Donor Suitability System</h2>
-        <p>Please upload medical records and answer questions to assess donor suitability.</p>
+        <p>Use this system to assess donor suitability. Upload patient medical records and review critical criteria for sepsis determination.</p>
     </main>
 
     <!-- Results Page -->
     <main id="results-page" style="display: none;">
         <h2>Donor Assessment Results</h2>
-        <p>The following criteria are the most important when determining sepsis:</p>
+        <p>Below are the **most important criteria** for determining sepsis, along with the detailed results.</p>
 
         <!-- Highlighted Important Criteria -->
         <div class="important-criteria">
             <h3>Most Important Criteria</h3>
             <ul>
-                <li><b>Blood Culture:</b> <span id="blood-culture-result">Positive</span></li>
-                <li><b>White Blood Cells (WBC):</b> <span id="wbc-result">Elevated</span></li>
-                <li><b>Temperature (Temps):</b> <span id="temp-result">High (38.5°C)</span></li>
+                <li><b>Blood Culture:</b> Positive. Indicates potential systemic infection.</li>
+                <li><b>White Blood Cells (WBC):</b> Elevated. Suggests inflammatory response.</li>
+                <li><b>Temperature (Temps):</b> High (38.5°C). Sign of possible infection.</li>
             </ul>
         </div>
 
         <!-- Detailed Results Table -->
-        <h3>Preview Detailed Results</h3>
-        <table class="results-table">
+        <h3>Detailed Results</h3>
+        <table>
             <thead>
                 <tr>
                     <th>Criteria</th>
-                    <th>Status</th>
+                    <th>Result</th>
                     <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Blood Culture</td>
-                    <td id="table-blood-culture">Positive</td>
-                    <td>Consult needed for possible infection source.</td>
+                    <td>Positive</td>
+                    <td>Indicates systemic infection requiring immediate attention.</td>
                 </tr>
                 <tr>
                     <td>White Blood Cells (WBC)</td>
-                    <td id="table-wbc">Elevated</td>
-                    <td>Significant indicator of systemic infection.</td>
+                    <td>Elevated</td>
+                    <td>Strong indicator of inflammation or infection.</td>
                 </tr>
                 <tr>
                     <td>Temperature (Temps)</td>
-                    <td id="table-temp">High</td>
-                    <td>Clinical evidence of infection or inflammation.</td>
+                    <td>High</td>
+                    <td>Clinical evidence of infection.</td>
                 </tr>
                 <tr>
                     <td>Low Blood Pressure</td>
                     <td>Normal</td>
-                    <td>No issues detected.</td>
+                    <td>No signs of hypotension.</td>
                 </tr>
                 <tr>
                     <td>Unexplained Hypoxia</td>
-                    <td>No</td>
-                    <td>Within normal range.</td>
+                    <td>Normal</td>
+                    <td>Oxygen levels are stable.</td>
                 </tr>
             </tbody>
         </table>
 
-        <button onclick="downloadResults()">Download Detailed Report</button>
+        <!-- Preview and Download Button -->
+        <button class="btn-primary" onclick="previewDetails()">Preview Detailed Results</button>
+        <button class="btn-primary" onclick="downloadReport()">Download Full Report</button>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© Lion's Eye Bank of West Central Ohio</p>
+        <p>© Lion's Eye Bank of West Central Ohio. All rights reserved.</p>
     </footer>
 
     <script>
         function showPage(page) {
-            // Hide all pages
             const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
             pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
-            
-            // Show the selected page
             document.getElementById(`${page}-page`).style.display = 'block';
         }
 
-        function downloadResults() {
-            alert("Downloading detailed report...");
+        function previewDetails() {
+            alert("Previewing detailed results...");
+        }
+
+        function downloadReport() {
+            alert("Your detailed report is being downloaded.");
         }
     </script>
 </body>
