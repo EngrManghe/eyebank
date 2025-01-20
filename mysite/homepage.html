@@ -63,6 +63,15 @@
         .button-group button:hover {
             background-color: #003d62;
         }
+        .upload-form {
+            margin-top: 20px;
+        }
+        .upload-form input[type="file"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         footer {
             background-color: #005a8b;
             color: white;
@@ -94,14 +103,13 @@
     <!-- Header -->
     <header>
         <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo" class="logo">
-        <h1>Lion’s Eye Bank - Donor Suitability System</h1>
+        <h1>Lion’s Eye Bank - Donor Suitability Assessment System</h1>
     </header>
 
     <!-- Navigation Bar -->
     <nav>
         <button onclick="showPage('home')">Home</button>
         <button onclick="showPage('results')">View Results</button>
-        <button onclick="uploadFile()">Upload Records</button>
         <button>Contact Us</button>
     </nav>
 
@@ -109,9 +117,12 @@
     <main id="home-page">
         <h2>Welcome to the Donor Suitability System</h2>
         <p>Use our AI-driven system to streamline donor evaluation for eye transplantation. Upload medical records, view processed results, and make informed decisions efficiently.</p>
-        <div class="button-group">
-            <button onclick="uploadFile()">Upload Donor Records</button>
-            <button onclick="learnMore()">Learn More</button>
+        
+        <!-- Upload Form -->
+        <div class="upload-form">
+            <label for="file-upload">Upload Donor Records:</label>
+            <input type="file" id="file-upload" name="donor-file" accept=".pdf, .json">
+            <button onclick="submitFile()">Submit</button>
         </div>
     </main>
 
@@ -156,12 +167,14 @@
             document.getElementById('results-page').style.display = page === 'results' ? 'block' : 'none';
         }
 
-        function uploadFile() {
-            alert('Upload functionality coming soon!');
-        }
-
-        function learnMore() {
-            alert('Learn more about our system and how it works.');
+        function submitFile() {
+            const fileInput = document.getElementById('file-upload');
+            if (fileInput.files.length === 0) {
+                alert('Please select a file to upload.');
+            } else {
+                alert('File submitted successfully!');
+                // Add backend integration for file submission here.
+            }
         }
 
         function downloadReport() {
