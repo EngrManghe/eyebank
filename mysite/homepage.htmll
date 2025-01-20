@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion's Eye Bank - Donor Assessment</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #004d61;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #007b8a;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav button {
+            background-color: #ffffff;
+            color: #007b8a;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        nav button:hover {
+            background-color: #005a6b;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .upload-section, .question-section {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"], textarea {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #004d61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #003d50;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .results-table th {
+            background-color: #004d61;
+            color: white;
+        }
+
+        footer {
+            background-color: #004d61;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">
+        <h1>Lion's Eye Bank - Donor Suitability System</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('results')">Results</button>
+        <button>Contact Us</button>
+    </nav>
+
+    <!-- Home Page -->
+    <main id="home-page">
+        <h2>Welcome to the Donor Suitability System</h2>
+        <p>Please upload medical records and answer questions to assess donor suitability.</p>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <label for="file-upload">Upload Donor Records:</label>
+            <input type="file" id="file-upload" accept=".pdf, .json">
+        </div>
+
+        <!-- Questions Section -->
+        <div class="question-section">
+            <label for="questions">Ask Questions:</label>
+            <textarea id="questions" rows="4" placeholder="Type your questions here..."></textarea>
+        </div>
+
+        <!-- Submit Buttons -->
+        <button onclick="submitFile()">Submit</button>
+    </main>
+
+    <!-- Results Page -->
+    <main id="results-page" style="display: none;">
+        <h2>Donor Assessment Results</h2>
+
+        <!-- Results Table -->
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Positive Blood Cultures?</td>
+                    <td>Yes</td>
+                    <td>Sepsis consult recommended.</td>
+                </tr>
+                <tr>
+                    <td>Clinical Evidence of Infection?</td>
+                    <td>No</td>
+                    <td>Low sepsis risk.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Next Steps -->
+        <button onclick="downloadResults()">Download Report</button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Lion's Eye Bank of West Central Ohio</p>
+    </footer>
+
+    <script>
+        // Navigation
+        function showPage(page) {
+            document.getElementById('home-page').style.display = page === 'home' ? 'block' : 'none';
+            document.getElementById('results-page').style.display = page === 'results' ? 'block' : 'none';
+        }
+
+        // Submit File Functionality
+        function submitFile() {
+            const fileInput = document.getElementById('file-upload');
+            if (!fileInput.files.length) {
+                alert("Please upload a file.");
+            } else {
+                alert("File uploaded successfully!");
+            }
+        }
+
+        // Download Results
+        function downloadResults() {
+            alert("Download functionality is under development.");
+        }
+    </script>
+</body>
+</html>
