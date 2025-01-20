@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion's Eye Bank - Donor Assessment</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #004d61;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #007b8a;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav button {
+            background-color: #ffffff;
+            color: #007b8a;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: #005a6b;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .upload-section, .question-section {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"], textarea {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #004d61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003d50;
+        }
+
+        .results-preview, .results-table {
+            margin-top: 20px;
+        }
+
+        .results-preview {
+            background-color: #eef6f8;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .results-preview h3 {
+            margin: 0 0 10px 0;
+            color: #004d61;
+        }
+
+        .results-preview p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .results-table th {
+            background-color: #004d61;
+            color: white;
+        }
+
+        footer {
+            background-color: #004d61;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">
+        <h1>Lion's Eye Bank - Donor Suitability System</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('results')">Results</button>
+        <button onclick="showPage('login')">Login</button>
+        <button onclick="showPage('community')">Community</button>
+        <button onclick="showPage('technical')">Technical</button>
+        <button onclick="showPage('about')">About Us</button>
+        <button onclick="showPage('register')">Register as a Donor</button>
+    </nav>
+
+    <!-- Home Page -->
+    <main id="home-page">
+        <h2>Welcome to the Donor Suitability System</h2>
+        <p>Please upload medical records and answer questions to assess donor suitability.</p>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <label for="file-upload">Upload Donor Records:</label>
+            <input type="file" id="file-upload" accept=".pdf, .json">
+        </div>
+
+        <!-- Questions Section -->
+        <div class="question-section">
+            <label for="questions">Ask Questions:</label>
+            <textarea id="questions" rows="4" placeholder="Type your questions here..."></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <button onclick="submitFile()">Upload File</button>
+        <button onclick="submitQuestion()">Submit Questions</button>
+    </main>
+
+    <!-- Results Page -->
+    <main id="results-page" style="display: none;">
+        <h2>Donor Assessment Results</h2>
+        
+        <!-- Results Preview Section -->
+        <div class="results-preview">
+            <h3>Key Metrics for Sepsis:</h3>
+            <p><b>Blood Culture:</b> Positive</p>
+            <p><b>White Blood Cells (WBC):</b> Elevated</p>
+            <p><b>Temperature:</b> 102.5°F (High)</p>
+        </div>
+
+        <!-- Detailed Results Table -->
+        <div>
+            <h3>Detailed Results:</h3>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Blood Culture</td>
+                        <td>Positive</td>
+                        <td>High risk of infection detected</td>
+                    </tr>
+                    <tr>
+                        <td>White Blood Cells (WBC)</td>
+                        <td>Elevated</td>
+                        <td>Value above 12,000/mcL</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>High</td>
+                        <td>102.5°F indicates systemic infection</td>
+                    </tr>
+                    <tr>
+                        <td>Respiratory Rate</td>
+                        <td>Normal</td>
+                        <td>Within safe limits</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Buttons -->
+        <button onclick="downloadResults()">Download Detailed Report</button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Lion's Eye Bank of West Central Ohio</p>
+    </footer>
+
+    <script>
+        function showPage(page) {
+            // Hide all pages
+            const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
+            pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
+            
+            // Show the selected page
+            document.getElementById(`${page}-page`).style.display = 'block';
+        }
+
+        function submitFile() {
+            alert('File uploaded successfully!');
+        }
+
+        function submitQuestion() {
+            alert('Your question has been submitted!');
+        }
+
+        function downloadResults() {
+            alert('Download functionality coming soon!');
+        }
+    </script>
+</body>
+</html>
