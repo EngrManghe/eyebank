@@ -4,63 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lion's Eye Bank - Donor Suitability System</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #005a8b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #003d62;
+            padding: 10px;
+            text-align: center;
+        }
+        nav button {
+            background-color: #ffffff;
+            color: #003d62;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        nav button:hover {
+            background-color: #005a8b;
+            color: white;
+        }
+        main {
+            padding: 20px;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group button {
+            padding: 10px 15px;
+            background-color: #005a8b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .button-group button:hover {
+            background-color: #003d62;
+        }
+        footer {
+            background-color: #005a8b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #005a8b;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo" class="logo">
-        <h1>Lion’s Eye Bank - Donor Suitability Assessment System</h1>
+        <h1>Lion’s Eye Bank - Donor Suitability System</h1>
     </header>
 
     <!-- Navigation Bar -->
     <nav>
-        <button onclick="navigate('home')">Home</button>
-        <button onclick="navigate('upload')">Upload Records</button>
-        <button onclick="navigate('results')">View Results</button>
-        <button onclick="navigate('contact')">Contact Us</button>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('results')">View Results</button>
+        <button onclick="uploadFile()">Upload Records</button>
+        <button>Contact Us</button>
     </nav>
 
     <!-- Home Page -->
     <main id="home-page">
-        <section class="intro">
-            <p>Streamline donor evaluation with our AI-driven framework. Upload medical records to assess suitability with accuracy and efficiency.</p>
-            <button onclick="uploadFile()">Upload Donor Records (PDF/JSON)</button>
-            <button onclick="showInstructions()">How to Use the System?</button>
-            <button onclick="login()">Login/Register</button>
-        </section>
+        <h2>Welcome to the Donor Suitability System</h2>
+        <p>Use our AI-driven system to streamline donor evaluation for eye transplantation. Upload medical records, view processed results, and make informed decisions efficiently.</p>
+        <div class="button-group">
+            <button onclick="uploadFile()">Upload Donor Records</button>
+            <button onclick="learnMore()">Learn More</button>
+        </div>
     </main>
 
     <!-- Results Page -->
-    <main id="result-page" style="display: none;">
-        <section class="results">
-            <h2>Processed Results</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Donor Name</th>
-                        <th>Eligibility Status</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>Eligible</td>
-                        <td>No issues detected.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onclick="downloadReport()">Download Detailed Report (PDF)</button>
-            <button onclick="provideFeedback()">Provide Feedback on Results</button>
-            <input type="text" placeholder="Search Previous Records">
-        </section>
+    <main id="results-page" style="display: none;">
+        <h2>Processed Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Eligibility Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>Eligible</td>
+                    <td>No issues detected.</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>Ineligible</td>
+                    <td>History of sepsis.</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-group">
+            <button onclick="downloadReport()">Download Detailed Report</button>
+            <button onclick="feedback()">Provide Feedback</button>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© Lion’s Eye Bank of West Central Ohio</p>
-        <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+        <p>© Lion’s Eye Bank of West Central Ohio. All rights reserved.</p>
     </footer>
+
+    <script>
+        function showPage(page) {
+            document.getElementById('home-page').style.display = page === 'home' ? 'block' : 'none';
+            document.getElementById('results-page').style.display = page === 'results' ? 'block' : 'none';
+        }
+
+        function uploadFile() {
+            alert('Upload functionality coming soon!');
+        }
+
+        function learnMore() {
+            alert('Learn more about our system and how it works.');
+        }
+
+        function downloadReport() {
+            alert('Download functionality coming soon!');
+        }
+
+        function feedback() {
+            alert('Feedback form coming soon!');
+        }
+    </script>
 </body>
 </html>
+
