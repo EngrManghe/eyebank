@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
+            color: #333;
         }
 
         header {
@@ -46,6 +47,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-weight: bold;
+            transition: all 0.3s ease;
         }
 
         nav button:hover {
@@ -67,13 +69,36 @@
             margin-bottom: 5px;
         }
 
-        input[type="file"], textarea {
+        input[type="file"] {
+            display: inline-block;
+            padding: 10px;
+            border: 2px solid #007b8a;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button {
+            background-color: #004d61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #003d50;
+        }
+
+        textarea {
             padding: 10px;
             width: 100%;
             max-width: 500px;
             margin-bottom: 15px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
         }
 
         button {
@@ -83,6 +108,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
         button:hover {
@@ -93,6 +120,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 14px;
         }
 
         .results-table th, .results-table td {
@@ -104,6 +132,14 @@
         .results-table th {
             background-color: #004d61;
             color: white;
+        }
+
+        .flowchart-box {
+            background-color: #eef6f8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
         }
 
         footer {
@@ -148,39 +184,56 @@
             <textarea id="questions" rows="4" placeholder="Type your questions here..."></textarea>
         </div>
 
-        <!-- Submit Buttons -->
-        <button onclick="submitFile()">Submit</button>
+        <!-- Buttons -->
+        <button onclick="submitFile()">Upload File</button>
+        <button onclick="submitQuestion()">Submit Questions</button>
     </main>
 
     <!-- Results Page -->
     <main id="results-page" style="display: none;">
         <h2>Donor Assessment Results</h2>
+        <p>The processed results are displayed below:</p>
 
-        <!-- Results Table -->
+        <!-- Flowchart-Like Results -->
+        <div class="flowchart-box">
+            <h3>Sepsis Evaluation:</h3>
+            <ul>
+                <li><b>Diagnosed or Suspected Sepsis?</b> Yes</li>
+                <li><b>Positive Blood Cultures?</b> Yes</li>
+                <li><b>High Sepsis Risk:</b> Immediate Consultation Recommended</li>
+            </ul>
+        </div>
+
+        <!-- Detailed Results Table -->
         <table class="results-table">
             <thead>
                 <tr>
-                    <th>Question</th>
-                    <th>Answer</th>
+                    <th>Criteria</th>
+                    <th>Status</th>
                     <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Positive Blood Cultures?</td>
+                    <td>Positive Blood Cultures</td>
                     <td>Yes</td>
-                    <td>Sepsis consult recommended.</td>
+                    <td>Requires attention</td>
                 </tr>
                 <tr>
-                    <td>Clinical Evidence of Infection?</td>
+                    <td>Low Blood Pressure</td>
                     <td>No</td>
-                    <td>Low sepsis risk.</td>
+                    <td>Normal levels</td>
+                </tr>
+                <tr>
+                    <td>Unexplained Hypoxia</td>
+                    <td>No</td>
+                    <td>Within normal range</td>
                 </tr>
             </tbody>
         </table>
 
         <!-- Next Steps -->
-        <button onclick="downloadResults()">Download Report</button>
+        <button onclick="downloadResults()">Download Detailed Report</button>
     </main>
 
     <!-- Footer -->
@@ -205,9 +258,19 @@
             }
         }
 
+        // Submit Questions Functionality
+        function submitQuestion() {
+            const question = document.getElementById('questions').value;
+            if (!question.trim()) {
+                alert("Please type a question.");
+            } else {
+                alert("Question submitted successfully!");
+            }
+        }
+
         // Download Results
         function downloadResults() {
-            alert("Download functionality is under development.");
+            alert("Download functionality under development.");
         }
     </script>
 </body>
