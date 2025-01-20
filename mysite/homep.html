@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion's Eye Bank - Donor Assessment</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #004d61;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #007b8a;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav button {
+            background-color: #ffffff;
+            color: #007b8a;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: #005a6b;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .upload-section, .question-section {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"], textarea {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #004d61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003d50;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .results-table th {
+            background-color: #004d61;
+            color: white;
+        }
+
+        footer {
+            background-color: #004d61;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">
+        <h1>Lion's Eye Bank - Donor Suitability System</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('results')">Results</button>
+        <button onclick="showPage('login')">Login</button>
+        <button onclick="showPage('community')">Community</button>
+        <button onclick="showPage('technical')">Technical</button>
+        <button onclick="showPage('about')">About Us</button>
+        <button onclick="showPage('register')">Register as a Donor</button>
+    </nav>
+
+    <!-- Home Page -->
+    <main id="home-page">
+        <h2>Welcome to the Donor Suitability System</h2>
+        <p>Please upload medical records and answer questions to assess donor suitability.</p>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <label for="file-upload">Upload Donor Records:</label>
+            <input type="file" id="file-upload" accept=".pdf, .json">
+        </div>
+
+        <!-- Questions Section -->
+        <div class="question-section">
+            <label for="questions">Ask Questions:</label>
+            <textarea id="questions" rows="4" placeholder="Type your questions here..."></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <button onclick="submitFile()">Upload File</button>
+        <button onclick="submitQuestion()">Submit Questions</button>
+    </main>
+
+    <!-- Results Page -->
+    <main id="results-page" style="display: none;">
+        <h2>Donor Assessment Results</h2>
+        <p>The processed results are displayed below:</p>
+
+        <!-- Detailed Results Table -->
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Positive Blood Cultures</td>
+                    <td>Yes</td>
+                    <td>Requires attention</td>
+                </tr>
+                <tr>
+                    <td>Low Blood Pressure</td>
+                    <td>No</td>
+                    <td>Normal levels</td>
+                </tr>
+                <tr>
+                    <td>Unexplained Hypoxia</td>
+                    <td>No</td>
+                    <td>Within normal range</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button onclick="downloadResults()">Download Detailed Report</button>
+    </main>
+
+    <!-- Login Page -->
+    <main id="login-page" style="display: none;">
+        <h2>Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password">
+        <button onclick="login()">Login</button>
+    </main>
+
+    <!-- Community Page -->
+    <main id="community-page" style="display: none;">
+        <h2>Community</h2>
+        <p>Connect with others in the Lion's Eye Bank community to share experiences and resources.</p>
+    </main>
+
+    <!-- Technical Page -->
+    <main id="technical-page" style="display: none;">
+        <h2>Technical Support</h2>
+        <p>If you need assistance with the system, please contact our technical support team.</p>
+    </main>
+
+    <!-- About Us Page -->
+    <main id="about-page" style="display: none;">
+        <h2>About Us</h2>
+        <p>The Lion's Eye Bank of West Central Ohio is dedicated to helping individuals through organ donation and transplantation.</p>
+    </main>
+
+    <!-- Register as a Donor Page -->
+    <main id="register-page" style="display: none;">
+        <h2>Register as a Donor</h2>
+        <p>Join our mission to save lives through eye and tissue donation.</p>
+        <button onclick="registerDonor()">Register Now</button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Lion's Eye Bank of West Central Ohio</p>
+    </footer>
+
+    <script>
+        function showPage(page) {
+            // Hide all pages
+            const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
+            pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
+            
+            // Show the selected page
+            document.getElementById(`${page}-page`).style.display = 'block';
+        }
+
+        function submitFile() {
+            alert('File uploaded successfully!');
+        }
+
+        function submitQuestion() {
+            alert('Your question has been submitted!');
+        }
+
+        function login() {
+            alert('Login functionality coming soon!');
+        }
+
+        function downloadResults() {
+            alert('Download functionality coming soon!');
+        }
+
+        function registerDonor() {
+            alert('Thank you for registering as a donor!');
+        }
+    </script>
+</body>
+</html>
