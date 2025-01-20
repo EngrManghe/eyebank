@@ -122,14 +122,18 @@
         <div class="upload-form">
             <label for="file-upload">Upload Donor Records:</label>
             <input type="file" id="file-upload" name="donor-file" accept=".pdf, .json">
-            <button onclick="submitFile()">Submit</button>
         </div>
 
         <!-- Questions Prompt -->
         <div class="question-form" style="margin-top: 20px;">
             <label for="question-prompt">Have questions? Ask here:</label>
             <textarea id="question-prompt" name="questions" rows="3" placeholder="Type your question here..." style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
-            <button onclick="submitQuestion()" style="margin-top: 10px;">Submit Question</button>
+        </div>
+
+        <!-- Submit Button -->
+        <div style="margin-top: 10px;">
+            <button onclick="submitQuestion()">Questions Prompt</button>
+            <button onclick="submitFile()">Submit</button>
         </div>
     </main>
 
@@ -204,5 +208,3 @@
     </script>
 </body>
 </html>
-
-
