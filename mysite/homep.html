@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lion's Eye Bank - Donor Assessment</title>
+    <link rel="stylesheet" href="https://donatesight.org/css/output.css?t=1737465305">
+
     <style>
         /* General Styling */
         body {
@@ -120,153 +122,354 @@
             width: 100%;
             bottom: 0;
         }
+        .link {
+            color: blue;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .link:hover {
+            color: #0202cd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007b8a;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">
-        <h1>Lion's Eye Bank - Donor Suitability System</h1>
-    </header>
+<!-- Header -->
+<header>
+    <img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">
+    <h1>Lion's Eye Bank - Donor Suitability System</h1>
+</header>
 
-    <!-- Navigation -->
-    <nav>
-        <button onclick="showPage('home')">Home</button>
-        <button onclick="showPage('results')">Results</button>
-        <button onclick="showPage('login')">Login</button>
-        <button onclick="showPage('community')">Community</button>
-        <button onclick="showPage('technical')">Technical</button>
-        <button onclick="showPage('about')">About Us</button>
-        <button onclick="showPage('register')">Register as a Donor</button>
-    </nav>
+<!-- Navigation -->
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('results')">Results</button>
+    <button onclick="showPage('community')">Community</button>
+    <button onclick="showPage('technical')">Technical</button>
+    <button onclick="showPage('about')">About Us</button>
+    <button onclick="showPage('login')" style = "margin-left: 140px">Login</button>
 
-    <!-- Home Page -->
-    <main id="home-page">
-        <h2>Welcome to the Donor Suitability System</h2>
-        <p>Please upload medical records and answer questions to assess donor suitability.</p>
+    <button onclick="showPage('register')">Register as a Donor</button>
+</nav>
 
-        <!-- Upload Section -->
-        <div class="upload-section">
-            <label for="file-upload">Upload Donor Records:</label>
-            <input type="file" id="file-upload" accept=".pdf, .json">
-        </div>
+<!-- Home Page -->
+<main id="home-page">
+    <h2>Welcome to the Donor Suitability System</h2>
+    <p>Please upload medical records and answer questions to assess donor suitability.</p>
 
-        <!-- Questions Section -->
-        <div class="question-section">
+    <!-- Upload Section -->
+    <div class="upload-section">
+        <label for="file-upload">Upload Donor Records:</label>
+        <input type="file" id="file-upload" accept=".pdf, .json">
+    </div>
+
+    <!-- Questions Section -->
+    <div class="question-section">
+
+        <div>
             <label for="questions">Ask Questions:</label>
-            <textarea id="questions" rows="4" placeholder="Type your questions here..."></textarea>
+            <select id="questions">
+                <option value = "1">1. First question</option>
+                <option value = "2">The second question</option>
+                <option value = "3">The third question</option>
+                <option value = "4">The 4 question</option>
+            </select>
+            <button>Select question</button>
         </div>
+    </div>
 
-        <!-- Buttons -->
-        <button onclick="submitFile()">Upload File</button>
-        <button onclick="submitQuestion()">Submit Questions</button>
-    </main>
+    <!-- Buttons -->
+    <button onclick="submitFile()">Upload File</button>
+    <button onclick="submitQuestion()">Submit Questions</button>
+</main>
 
-    <!-- Results Page -->
-    <main id="results-page" style="display: none;">
-        <h2>Donor Assessment Results</h2>
-        <p>The processed results are displayed below:</p>
 
-        <!-- Detailed Results Table -->
-        <table class="results-table">
-            <thead>
-                <tr>
-                    <th>Criteria</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
+
+<!-- Results Page -->
+<main id="results-page" style="display: none;">
+
+    <!-- Highlighted Important Criteria -->
+    <div class="important-criteria">
+        <h3>Most Important Criteria</h3>
+        <ul>
+            <li><b>Blood Culture:</b> Positive. Indicates potential systemic infection.</li>
+            <li><b>White Blood Cells (WBC):</b> Elevated. Suggests inflammatory response.</li>
+            <li><b>Temperature (Temps):</b> High (38.5°C). Sign of possible infection.</li>
+        </ul>
+    </div>
+
+    <!-- Detailed Results Table -->
+    <h3>Detailed Results</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Criteria</th>
+            <th>Result</th>
+            <th>Notes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td onclick = "showResultDetails('blood-culture-criterion')" class = "link">Blood Culture</td>
+            <td>Positive</td>
+            <td>Indicates systemic infection requiring immediate attention.</td>
+        </tr>
+        <tr>
+            <td onclick = "showResultDetails('white-blood-cells-criterion')" class = "link">White Blood Cells (WBC)</td>
+            <td>Elevated</td>
+            <td>Strong indicator of inflammation or infection.</td>
+        </tr>
+        <tr>
+            <td onclick = "showResultDetails('temperature-criterion')" class = "link">Temperature (Temps)</td>
+            <td>High</td>
+            <td>Clinical evidence of infection.</td>
+        </tr>
+        <tr>
+            <td onclick = "showResultDetails('low-blood-pressure-criterion')" class = "link">Low Blood Pressure</td>
+            <td>Normal</td>
+            <td>No signs of hypotension.</td>
+        </tr>
+        <tr>
+            <td onclick = "showResultDetails('unexplained-hypoxia-criterion')" class = "link">Unexplained Hypoxia</td>
+            <td>Normal</td>
+            <td>Oxygen levels are stable.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id = "blood-culture-criterion" style="display: none;" criterion-result >
+        <ul>
+            <li>Blood culture 1</li>
+            <li>Blood culture 2</li>
+            <li>Blood culture 3</li>
+        </ul>
+    </div>
+
+    <div id = "white-blood-cells-criterion" style="display: none;" criterion-result >
+        <h3>White Blood Cells Criterion</h3>
+        <table>
             <tbody>
-                <tr>
-                    <td>Positive Blood Cultures</td>
-                    <td>Yes</td>
-                    <td>Requires attention</td>
-                </tr>
-                <tr>
-                    <td>Low Blood Pressure</td>
-                    <td>No</td>
-                    <td>Normal levels</td>
-                </tr>
-                <tr>
-                    <td>Unexplained Hypoxia</td>
-                    <td>No</td>
-                    <td>Within normal range</td>
-                </tr>
+            <tr>
+                <td>124124</td>
+                <td>C124124</td>
+            </tr>
+            <tr>
+                <td>124</td>
+                <td>dfgdfghdfhdfh</td>
+            </tr>
+            <tr>
+                <td>124124</td>
+                <td>erwetwetwet</td>
+            </tr>
             </tbody>
         </table>
+    </div>
 
-        <button onclick="downloadResults()">Download Detailed Report</button>
-    </main>
+    <div id = "temperature-criterion" style="display: none;" criterion-result >
+        <ul>
+            <li>T 40</li>
+            <li>T 41</li>
+            <li>T 42</li>
+            <li>T 43</li>
+        </ul>
+    </div>
 
-    <!-- Login Page -->
-    <main id="login-page" style="display: none;">
-        <h2>Login</h2>
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username">
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password">
-        <button onclick="login()">Login</button>
-    </main>
+    <div id = "low-blood-pressure-criterion" style="display: none;" criterion-result >
+        <ul>
+            <li>VERY LOW</li>
+            <li>TOO LOW</li>
 
-    <!-- Community Page -->
-    <main id="community-page" style="display: none;">
-        <h2>Community</h2>
-        <p>Connect with others in the Lion's Eye Bank community to share experiences and resources.</p>
-    </main>
+        </ul>
+    </div>
 
-    <!-- Technical Page -->
-    <main id="technical-page" style="display: none;">
-        <h2>Technical Support</h2>
-        <p>If you need assistance with the system, please contact our technical support team.</p>
-    </main>
+    <div id = "unexplained-hypoxia-criterion" style="display: none;" criterion-result >
+        <ul>
+            <li>SOME DATA</li>
+        </ul>
+    </div>
 
-    <!-- About Us Page -->
-    <main id="about-page" style="display: none;">
-        <h2>About Us</h2>
-        <p>The Lion's Eye Bank of West Central Ohio is dedicated to helping individuals through organ donation and transplantation.</p>
-    </main>
+    <!-- Preview and Download Button -->
+    <button class="btn-primary" onclick="previewDetails()">Preview Detailed Results</button>
+    <button class="btn-primary" onclick="downloadReport()">Download Full Report</button>
+</main>
+</main>
 
-    <!-- Register as a Donor Page -->
-    <main id="register-page" style="display: none;">
-        <h2>Register as a Donor</h2>
-        <p>Join our mission to save lives through eye and tissue donation.</p>
-        <button onclick="registerDonor()">Register Now</button>
-    </main>
+<!-- Login Page -->
+<main id="login-page" style="display: none;">
+    <h2>Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter your password">
+    <button onclick="login()">Login</button>
+</main>
 
-    <!-- Footer -->
-    <footer>
-        <p>© Lion's Eye Bank of West Central Ohio</p>
-    </footer>
+<!-- Community Page -->
+<main id="community-page" style="display: none;">
+    <h2>Community</h2>
+    <p>Connect with others in the Lion's Eye Bank community to share experiences and resources.</p>
+</main>
 
-    <script>
-        function showPage(page) {
-            // Hide all pages
-            const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
-            pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
-            
-            // Show the selected page
-            document.getElementById(`${page}-page`).style.display = 'block';
-        }
+<!-- Technical Page -->
+<main id="technical-page" style="display: none;">
+    <h2>Technical Support</h2>
+    <p>If you need assistance with the system, please contact our technical support team.</p>
+</main>
 
-        function submitFile() {
-            alert('File uploaded successfully!');
-        }
+<!-- About Us Page -->
+<main id="about-page" style="display: none;">
+    <h2>About Us</h2>
+    <p>The Lion's Eye Bank of West Central Ohio is dedicated to helping individuals through organ donation and transplantation.</p>
+</main>
 
-        function submitQuestion() {
-            alert('Your question has been submitted!');
-        }
+<!-- Register as a Donor Page -->
+<main id="register-page" style="display: none;">
+    <h2>Register as a Donor</h2>
+    <p>Join our mission to save lives through eye and tissue donation.</p>
+    <button onclick="registerDonor()">Register Now</button>
+</main>
 
-        function login() {
-            alert('Login functionality coming soon!');
-        }
+<!-- Footer -->
 
-        function downloadResults() {
-            alert('Download functionality coming soon!');
-        }
+<div id="footer" class="bg-blue py-4 px-2 md:p-10 lg:px-36">
+    <h2 class="font-serif text-center text-2xl mb-10 text-white">Lions Eye Bank of West Central Ohio</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 container mx-auto">
+        <div>
+            <div class="bg-white p-2 rounded-lg max-w-sm">
+                <img src="https://donatesight.org/img/logos/ebaa-accredited.png" class="w-full h-auto object-scale-down">
+            </div>
+        </div>
+        <div class="space-y-10">
+            <ul class="uppercase font-semibold space-y-2">
+                <li>
+                    <a href="/Community" class="text-orange-light">
+                        Community
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/AboutDonation" class="text-white">
+                        About Donation
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/GriefSupport" class="text-white">
+                        Grief Support
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/Events" class="text-white">
+                        Events
+                    </a>
+                </li>
+            </ul>
+            <ul class="uppercase font-semibold space-y-2">
+                <li>
+                    <a href="/Technical" class="text-orange-light">
+                        Technical
+                    </a>
+                </li>
+                <li>
+                    <a href="/Technical/Services" class="text-white">
+                        Our Services
+                    </a>
+                </li>
+                <li>
+                    <a href="/Technical/Licensure" class="text-white">
+                        Quality &amp; Licensure
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="space-y-10">
+            <ul class="font-semibold space-y-2 text-white">
+                <li>
+                            <span class="text-orange-light uppercase">
+                            Our Location
+                            </span>
+                </li>
+                <li>
+                    TEL. (937) 396-1000
+                </li>
+                <li>
+                    FAX. (937) 396-0908
+                </li>
+                <li>
+                    3309 Office Park Drive
+                </li>
+                <li>
+                    Dayton, OH 45439
+                </li>
+            </ul>
+            <ul class="font-semibold space-y-2 text-white">
+                <li class="uppercase text-orange-light">
+                    Office Hours
+                </li>
+                <li>
+                    Monday - Friday
+                </li>
+                <li>
+                    9:00 - 5:00
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
 
-        function registerDonor() {
-            alert('Thank you for registering as a donor!');
-        }
-    </script>
+	function showResultDetails(idElement) {
+
+		const results = document.querySelectorAll('div[criterion-result]');
+		results.forEach(result => {
+			console.log(result)
+			result.style.display = 'none'
+		})
+
+		// Show the selected page
+		document.getElementById(idElement).style.display = 'block';
+	}
+
+	function showPage(page) {
+		// Hide all pages
+		const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
+		pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
+
+		// Show the selected page
+		document.getElementById(`${page}-page`).style.display = 'block';
+	}
+
+	function submitFile() {
+		alert('File uploaded successfully!');
+	}
+
+	function submitQuestion() {
+		alert('Your question has been submitted!');
+	}
+
+	function login() {
+		alert('Login functionality coming soon!');
+	}
+
+	function downloadResults() {
+		alert('Download functionality coming soon!');
+	}
+
+	function registerDonor() {
+		alert('Thank you for registering as a donor!');
+	}
+</script>
 </body>
 </html>
