@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion's Eye Bank - Donor Assessment</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <!--<img src="lions_eye_bank_logo.png" alt="Lion's Eye Bank Logo">-->
+    <img src="{% static 'images/lions_eye_bank_logo.png' %}" alt="Lion's Eye Bank Logo">
+
+    <h1>Lion's Eye Bank - Donor Suitability System</h1>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('results')">Results</button>
+    <button onclick="showPage('community')">Community</button>
+    <button onclick="showPage('technical')">Technical</button>
+    <button onclick="showPage('about')">About Us</button>
+
+    <button onclick="showPage('login')" style = "margin-left: 140px">Login</button>
+    <button onclick="showPage('register')">Register as a Donor</button>
+</nav>
+
+<!-- Home Page -->
+<main id="home-page">
+    <h2>Welcome to the Donor Suitability System</h2>
+    <p>Please upload medical records and answer questions to assess donor suitability.</p>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+        {% csrf_token %}
+        <label for="file-upload">Upload Donor Records:</label>
+        <input type="file" id="file-upload" name="donor_file" accept=".pdf, .json">
+    </div>
+
+    <!-- Questions Section -->
+    <div class="question-section">
+        <div>
+            <label for="questions">Choose proper prompt:</label>
+            <select id="questions">
+                <option value = "1">1. Eye Bank Data Structure for Medical Records, Sepsis, and Transfusion</option>
+                <option value = "2">2. Second prompt title</option>
+                <option value = "3">3. Third prompt title</option>
+                <option value = "4">4. 4th prompt title</option>
+            </select>
+            <button onclick="loadPrompt()">Select</button>
+        </div>
+    </div>
+    <div id="prompt-content"></div>
+
+    <!-- Loading spinner and status messages -->
+    <div id="status-message"></div>
+    <div id="loading-spinner" style="display: none;">Loading...</div>
+
+    <!-- Buttons -->
+    <button onclick="submitQuestion()">Submit</button>
+</main>
+
+<!-- Results Page -->
+<main id="results-page" style="display: none;">
+    <h3>Latest Donor Assessment Results</h3>
+    <div id="results-content">
+        <button onclick="fetchLatestResults(); showPage('results')">Results</button>
+    </div>
+</main>
+
+<!-- Login Page -->
+<main id="login-page" style="display: none;">
+    <h2>Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter your password">
+    <button onclick="login()">Login</button>
+</main>
+
+<!-- Community Page -->
+<main id="community-page" style="display: none;">
+    <h2>Community</h2>
+    <p>Connect with others in the Lion's Eye Bank community to share experiences and resources.</p>
+</main>
+
+<!-- Technical Page -->
+<main id="technical-page" style="display: none;">
+    <h2>Technical Support</h2>
+    <p>If you need assistance with the system, please contact our technical support team.</p>
+</main>
+
+<!-- About Us Page -->
+<main id="about-page" style="display: none;">
+    <h2>About Us</h2>
+    <p>The Lion's Eye Bank of West Central Ohio is dedicated to helping individuals through organ donation and transplantation.</p>
+</main>
+
+<!-- Register as a Donor Page -->
+<main id="register-page" style="display: none;">
+    <h2>Register as a Donor</h2>
+    <p>Join our mission to save lives through eye and tissue donation.</p>
+    <button onclick="registerDonor()">Register Now</button>
+</main>
+
+<!-- Footer -->
+
+<div id="footer" class="bg-blue py-4 px-2 md:p-10 lg:px-36">
+    <h2 class="font-serif text-center text-2xl mb-10 text-white">Lions Eye Bank of West Central Ohio</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 container mx-auto">
+        <div>
+            <div class="bg-white p-2 rounded-lg max-w-sm">
+                <img src="{% static 'images/ebaa-accredited.webp' %}" class="w-full h-auto object-scale-down">
+            </div>
+        </div>
+        <div class="space-y-10">
+            <ul class="uppercase font-semibold space-y-2">
+                <li>
+                    <a href="/Community" class="text-orange-light">
+                        Community
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/AboutDonation" class="text-white">
+                        About Donation
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/GriefSupport" class="text-white">
+                        Grief Support
+                    </a>
+                </li>
+                <li>
+                    <a href="/Community/Events" class="text-white">
+                        Events
+                    </a>
+                </li>
+            </ul>
+            <ul class="uppercase font-semibold space-y-2">
+                <li>
+                    <a href="/Technical" class="text-orange-light">
+                        Technical
+                    </a>
+                </li>
+                <li>
+                    <a href="/Technical/Services" class="text-white">
+                        Our Services
+                    </a>
+                </li>
+                <li>
+                    <a href="/Technical/Licensure" class="text-white">
+                        Quality &amp; Licensure
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="space-y-10">
+            <ul class="font-semibold space-y-2 text-white">
+                <li>
+                            <span class="text-orange-light uppercase">
+                            Our Location
+                            </span>
+                </li>
+                <li>
+                    TEL. (937) 396-1000
+                </li>
+                <li>
+                    FAX. (937) 396-0908
+                </li>
+                <li>
+                    3309 Office Park Drive
+                </li>
+                <li>
+                    Dayton, OH 45439
+                </li>
+            </ul>
+            <ul class="font-semibold space-y-2 text-white">
+                <li class="uppercase text-orange-light">
+                    Office Hours
+                </li>
+                <li>
+                    Monday - Friday
+                </li>
+                <li>
+                    9:00 - 5:00
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-center text-white mt-10">
+        <p>Website developed by <a href="https://www.linkedin.com/in/ruslanshamsiev/" class="text-orange-light underline" target="_blank">Ruslan Shamsiev</a></p>
+    </div>
+</div>
+<script>
+
+	function showResultDetails(idElement) {
+		const results = document.querySelectorAll('div[criterion-result]');
+		results.forEach(result => {
+			console.log(result)
+			result.style.display = 'none'
+		})
+
+		// Show the selected page
+		document.getElementById(idElement).style.display = 'block';
+	}
+
+	function showPage(page) {
+		// Hide all pages
+		const pages = ['home', 'results', 'login', 'community', 'technical', 'about', 'register'];
+		pages.forEach(p => document.getElementById(`${p}-page`).style.display = 'none');
+
+		// Show the selected page
+		document.getElementById(`${page}-page`).style.display = 'block';
+	}
+
+	function login() {
+		alert('Login functionality coming soon!');
+	}
+
+	function downloadResults() {
+		alert('Download functionality coming soon!');
+	}
+
+	function registerDonor() {
+		alert('Thank you for registering as a donor!');
+	}
+
+    //Ruslan
+    function submitQuestion() {
+        let fileInput = document.getElementById("file-upload");
+        let selectedQuestion = document.getElementById("questions").value;
+        let statusMessage = document.getElementById("status-message");
+        let loadingSpinner = document.getElementById("loading-spinner");
+
+        // Reset status message and hide spinner
+        statusMessage.innerHTML = "";
+        loadingSpinner.style.display = "none";
+
+        if (fileInput.files.length === 0) {
+            alert("Please select a file to upload.");
+            return;
+        }
+
+        if (!selectedQuestion) {
+            alert("Please select a question before submitting.");
+            return;
+        }
+
+        // Notify user that the process has started
+        statusMessage.innerHTML = "Uploading file and submitting question...";
+        loadingSpinner.style.display = "block"; // Show spinner
+
+        let formData = new FormData();
+        formData.append("donor_file", fileInput.files[0]);  // File data
+        formData.append("prompt_id", selectedQuestion); // Question data
+
+        //console.log("Submitting question:", selectedQuestion); // Debugging
+        fetch('/submit_question/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                statusMessage.innerHTML = "File and question submitted successfully!";
+                //fetchLatestResults();
+                //alert("File and question submitted successfully!");
+                //window.location.href = "/get-latest-json/"; // Redirect after submission
+                fetchLatestResults();
+                showPage('results');
+            } else {
+                statusMessage.innerHTML = `Error: ${data.error}`;
+                alert("Error: " + data.error);
+            }
+        })
+        .catch(error => {
+            loadingSpinner.style.display = "none"; // Hide spinner in case of error
+            console.error("Error:", error);
+            statusMessage.innerHTML = "An error occurred while submitting your data.";
+            alert("Error: An error occurred while submitting your data.");
+        });
+    }
+
+    // Function to get CSRF token if using Django
+    function getCSRFToken() {
+        let csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
+        return csrfToken ? csrfToken.value : "";
+    }
+
+    function loadPrompt() {
+        let selectedPrompt = document.getElementById("questions").value;
+
+        fetch(`/get_prompt/?prompt_id=${selectedPrompt}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.prompt) {
+                document.getElementById("prompt-content").innerText = data.prompt;
+            } else {
+                alert("Prompt not found");
+            }
+        })
+        .catch(error => console.error(error));
+    }
+    async function fetchLatestResults() {
+        const response = await fetch('/get-latest-json');
+        const data = await response.json();
+
+        if (!data) {
+            document.getElementById("results-content").innerHTML = "<p>No data available.</p>";
+            return;
+        }
+        // Check if JSON is an array and use the first object inside
+        const processedData = Array.isArray(data) ? data[0] : data;
+
+        // Convert JSON to table format
+        const tableHTML = generateTableFromJSON(processedData);
+        document.getElementById("results-content").innerHTML = tableHTML;
+    }
+
+    function generateTableFromJSON(obj) {
+        let table = "<table border='1' style='border-collapse: collapse; width: 100%;'>";
+        table += "<thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>";
+
+        for (const [key, value] of Object.entries(obj)) {
+            table += `<tr><td><b>${key}</b></td><td>${formatValue(value)}</td></tr>`;
+        }
+
+        table += "</tbody></table>";
+        return table;
+    }
+
+    function formatValue(value) {
+        if (typeof value === "object") {
+            if (Array.isArray(value)) {
+                // Check if array contains objects
+                if (value.length > 0 && typeof value[0] === "object") {
+                    return generateArrayTable(value); // Convert array of objects into table
+                } else {
+                    return `<ul>${value.map(v => `<li>${v}</li>`).join("")}</ul>`; // Simple list for plain values
+                }
+            } else {
+                return generateTableFromJSON(value); // Recursively create a table for nested objects
+            }
+        }
+        return value; // Return simple values directly
+    }
+
+    function generateArrayTable(array) {
+        if (array.length === 0) return "<p>No data</p>";
+
+        // Extract table headers from object keys
+        const headers = Object.keys(array[0]);
+        let table = "<table border='1' style='border-collapse: collapse; width: 100%;'>";
+        
+        // Generate headers
+        table += "<thead><tr>";
+        headers.forEach(header => {
+            table += `<th>${header}</th>`;
+        });
+        table += "</tr></thead><tbody>";
+
+        // Generate rows
+        array.forEach(obj => {
+            table += "<tr>";
+            headers.forEach(header => {
+                table += `<td>${obj[header]}</td>`;
+            });
+            table += "</tr>";
+        });
+
+        table += "</tbody></table>";
+        return table;
+    }
+
+
+
+
+    function formatObject(obj) {
+        let formattedText = "<ul>";
+        for (const [key, value] of Object.entries(obj)) {
+            if (typeof value === "object") {
+                formattedText += `<li><b>${key}:</b> ${formatObject(value)}</li>`;
+            } else {
+                formattedText += `<li><b>${key}:</b> ${value}</li>`;
+            }
+        }
+        formattedText += "</ul>";
+        return formattedText;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.hash === "#results") {
+            fetchLatestResults();
+        }
+    });
+</script>
+</body>
+</html>

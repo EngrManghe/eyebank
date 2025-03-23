@@ -1,0 +1,49 @@
+1.	I want you to provide an electronic medical records, sepsis and transfusion data in this file as in a json format. using medical records, sepsis and blood transfusion as the keys
+2.	I want you to memories this response as "eye bank data structure"
+3.	show me eye bank data structure
+4.	I want you to provide a medical records, sepsis and blood transfusion data in this file in a json format
+the structure should be exactly the same:
+
+
+[
+  {
+    "ElectronicMedicalRecords": {
+      "PatientDetails": {
+        "Name": "Ralph C. Samson",
+        "Age": 68,
+        "MedicalHistory": [
+          "Hypertension",
+          "Hip replacement surgery",
+          "History of gastric bypass surgery",
+          "History of joint replacement surgery",
+          "History of rotator cuff repair",
+          "History of abdomen surgery"
+        ],
+        "HospitalCourse": [
+          "Patient found unresponsive by his wife on 10/07/2024 after hip replacement surgery on 10/05/2024.",
+          "EMS initiated CPR and intubation in the field; epinephrine was administered.",
+          "Arrived at the hospital in asystole and was pronounced dead after failed resuscitation efforts."
+        ]
+      },
+      "Medications": [
+        "Epinephrine 1 mg IV (administered by EMS)",
+        "Sodium bicarbonate 8.4% injection IV"
+      ],
+      "HospitalDischarge": "Deceased on 10/07/2024 due to cardiac arrest and asystole."
+    },
+    "Sepsis": {
+      "InfectionIndicators": {
+        "WBC": "Not available",
+        "BloodCulture": "Not mentioned",
+        "Temperature": "Not documented",
+        "LowBloodPressure": "Not recorded",
+        "UnexplainedHypoxia": "Not mentioned"
+      },
+      "ClinicalNotes": "No direct mention of sepsis in the records. Death due to cardiac arrest and asystole after hip replacement surgery."
+    },
+    "BloodProducts": {
+      "HemoglobinLevels": "Not recorded",
+      "TransfusionEvents": "No blood transfusion administered during this encounter."
+    }
+  }
+]
