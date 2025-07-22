@@ -2,13 +2,12 @@
 {% load static %}
 <html lang="en">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lion's Eye Bank - Donor Assessment</title>
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <!-- Header -->
@@ -70,10 +69,11 @@
 <!-- Results Page -->
 <main id="results-page" style="display: none;">
     <h3>Latest Donor Assessment Results</h3>
-    <button onclick="downloadPDF()">Download PDF</button>
+    
     <div id="results-content">
         <button onclick="fetchLatestResults(); showPage('results')">Results</button>
     </div>
+    <button onclick="downloadJSON()">Download Results</button>
 </main>
 
 <!-- Login Page -->
@@ -325,6 +325,7 @@ results-content
         document.getElementById("results-content").innerHTML = tableHTML;
     }
 
+
     function generateTableFromJSON(obj) {
         let table = "<table border='1' style='border-collapse: collapse; width: 100%;'>";
         table += "<thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>";
@@ -401,7 +402,40 @@ results-content
             fetchLatestResults();
         }
     });
+    let latestResults = {
+        donor_id: "DNR_001",
+        age: 69,
+        gender: "M",
+        sepsis: false,
+        transfusion: true,
+        tissue_suitable: true
+    };
 
+    function downloadJSON() {
+
+
+        const elem = document.getElementById("results-content");
+        return html2pdf(elem);
+
+        if (typeof latestResults === "undefined" || Object.keys(latestResults).length === 0) {
+            alert("Results not ready yet. Please click 'Results' first.");
+            return;
+        }
+
+        const dataStr = JSON.stringify(latestResults, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "donor_results.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    results-content
 </script>
 </body>
 </html>
