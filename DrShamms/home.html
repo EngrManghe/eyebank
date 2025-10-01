@@ -31,6 +31,8 @@
     <button onclick="showPage('register')">Register as a Donor</button>
 </nav>
 
+<h1>1TEST</h1>
+
 <!-- Home Page -->
 <main id="home-page">
     <h2>Welcome to the Donor Suitability System</h2>
@@ -68,9 +70,9 @@
 </main>
 
 <!-- Results Page -->
-<main id="results-page" style="display: none;">
+<main id="results-page" class ="printable" style="display: none;">
     <h3>Latest Donor Assessment Results</h3>
-    <button onclick="downloadPDF()">Download PDF</button>
+    <button onclick="testPrintPDF()">Download PDF</button>
     <div id="results-content">
         <button onclick="fetchLatestResults(); showPage('results')">Results</button>
     </div>
@@ -195,12 +197,13 @@
             </ul>
         </div>
     </div>
-    <div class="text-center text-white mt-10">
-        <p>Website developed by <a href="https://www.linkedin.com/in/ruslanshamsiev/" class="text-orange-light underline" target="_blank">Ruslan Shamsiev</a></p>
-    </div>
+    
 </div>
 <script>
 
+    function testPrintPDF() {
+        window.print();
+    }
 	function showResultDetails(idElement) {
 		const results = document.querySelectorAll('div[criterion-result]');
 		results.forEach(result => {

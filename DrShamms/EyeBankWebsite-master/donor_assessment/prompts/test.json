@@ -1,0 +1,164 @@
+[
+    {
+      "DonorReferralSummary": {
+        "PatientName": "Christopher Rassenfoss",
+        "Age": 65,
+        "Sex": "Male",
+        "Hospital": "Mercy Memorial Center Perrysburg",
+        "AdmissionDiagnosis": "distended stomach",
+        "MedicalHistory": [
+          "glioblastoma (diagnosed 2017)",
+          "hypertension",
+          "seizures",
+          "hyperlipidemia",
+          "cataracts with surgery",
+          "developmentally delayed",
+          "autism",
+          "blind in left eye"
+        ],
+        "CauseOfDeath": "Asystole",
+        "ReferralDate": "2025-08-10"
+      },
+      "ScreeningEvaluation": {
+        "MatchedConditions": [
+          {
+            "Condition": "Glioblastoma",
+            "Category": "CNS Disease (Brain Tumor)",
+            "MatchedAgainst": "History of glioblastoma (dx in 2017)",
+            "Result": "Not Accepted"
+          }
+        ],
+        "FinalDecision": "Not Accepted",
+        "Reason": "Donor has a history of CNS malignancy (glioblastoma), which is a rule-out condition per donor screening guidelines."
+      }
+    },
+    {
+      "DonorExclusionCriteria": {
+        "RuleOutConditions": [
+          "Amyotrophic Lateral Sclerosis (ALS)",
+          "Lou Gehrig’s Disease",
+          "Alzheimer’s",
+          "Babesiosis",
+          "Batten Disease",
+          "Sjorgren-Batten Disease",
+          "Sjorgren’s",
+          "Spielmeyer-Vogt-Sjorgren-Batten Disease",
+          "Bechet’s Disease/Syndrome",
+          "Bestiality",
+          "Active Blastomycosis",
+          "Blood Transfusion in UK or France from 1980 to present",
+          "Blood Transfusion received outside US within past 12 months",
+          "Blood Transfusion or medical treatments that involve blood performed in Cameroon, Central African Republic, Chad, Congo, Equatorial Guinea, Gabon, Niger or Nigeria after 1977",
+          "Tick Bite within past 2 weeks",
+          "Active Idiopathic Cardiomyopathy",
+          "Active Viral Cardiomyopathy",
+          "Cellulitis on face",
+          "Chagas Disease",
+          "Creutzfeldt-Jakob Disease (CJD)",
+          "Ebola Virus Disease (EVD)",
+          "Edward Alfred Cockayne Syndrome",
+          "Cockayne Syndrome",
+          "Ehlers-Danlos Syndrome",
+          "Active Encephalitis",
+          "Viral Encephalitis",
+          "Active Endocarditis",
+          "Hallervorden-Spatz Disease",
+          "Viral Hepatitis",
+          "Hepatitis B",
+          "Hepatitis C",
+          "Hepatitis D",
+          "Active Hepatitis A",
+          "Active Hepatitis E",
+          "Unknown Hepatitis",
+          "HIV",
+          "AIDS",
+          "Viral Jaundice",
+          "Kennedy’s Disease",
+          "Kuru",
+          "Leishmaniasis",
+          "Leukoencephalopathy",
+          "Active Meningitis",
+          "Multiple Sclerosis (MS)",
+          "Mycobacterium Avium",
+          "Organic Brain Syndrome",
+          "Parkinson’s Disease",
+          "Pick’s Disease",
+          "Polyarteritis Nodosa",
+          "Panarteritis Nodosa (PAN)",
+          "Kussmaul Disease",
+          "Kussmaul-Maier Disease",
+          "Pott’s Disease",
+          "Congenital Rubella",
+          "Slow Virus Infection",
+          "Subacute Sclerosing Panencephalitis",
+          "Dawson Disease",
+          "Dawson Encephalitis",
+          "Walker-Warburg Syndrome",
+          "Warburg Syndrome",
+          "Chemke Syndrome",
+          "HARD Syndrome",
+          "Pagon Syndrome",
+          "Cerebroocular Dysgenesis",
+          "Multiple Myeloma",
+          "Polycythemia Vera",
+          "Retinoblastoma",
+          "Waldenstrom’s Macroblobulemia",
+          "Lymphoplasmacytic Lymphoma",
+          "Choroiditis",
+          "Keratoconus",
+          "Photorefractive Keratectomy"
+        ],
+        "FlagForFurtherInvestigation": [
+          "Cardiomyopathy",
+          "Chicken Pox",
+          "Cirrhosis",
+          "IV Drug Use",
+          "Delirium",
+          "Dermatomyositis",
+          "Drowning"
+        ]
+      },
+      "DonorScreeningTable": [
+        {
+          "Condition": "Amyotrophic Lateral Sclerosis (ALS)",
+          "ICD-10 Code": "G12.21",
+          "Clinical Category": "Neurology",
+          "Screening Action": "Rule Out",
+          "ResultIfMatched": "Not Accepted"
+        },
+        {
+          "Condition": "Alzheimer’s",
+          "ICD-10 Code": "G30.9",
+          "Clinical Category": "Neurology",
+          "Screening Action": "Rule Out",
+          "ResultIfMatched": "Not Accepted"
+        },
+        {
+          "Condition": "Chagas Disease",
+          "ICD-10 Code": "B57.9",
+          "Clinical Category": "Infectious Disease",
+          "Screening Action": "Rule Out",
+          "ResultIfMatched": "Not Accepted"
+        },
+        {
+          "Condition": "Cardiomyopathy",
+          "ICD-10 Code": "I42.9",
+          "Clinical Category": "Cardiology",
+          "Screening Action": "Flag for Review",
+          "ResultIfMatched": "Not Accepted"
+        },
+        {
+          "Condition": "Cirrhosis",
+          "ICD-10 Code": "K74.60",
+          "Clinical Category": "Hepatology",
+          "Screening Action": "Flag for Review",
+          "ResultIfMatched": "Not Accepted"
+        }
+      ],
+      "ScreeningLogic": {
+        "Description": "If any condition from this list appears in a donor's referral PDF or structured data, the result is 'Not Accepted'. If none are matched, then the donor is 'Accepted'.",
+        "DefaultIfNoMatch": "Accepted"
+      }
+    }
+  ]
+  

@@ -135,3 +135,15 @@ th {
     background-color: #007b8a;
     color: white;
 }
+
+
+@media print  {
+    body * {
+        visibility: hidden;
+    }
+    .printable, .printable * {
+        visibility: visible;
+    }
+}
+
+

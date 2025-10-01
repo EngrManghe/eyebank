@@ -49,7 +49,7 @@
             <label for="questions">Choose proper prompt:</label>
             <select id="questions">
                 <option value = "1">1. Eye Bank Data Structure for Medical Records, Sepsis, and Transfusion</option>
-                <option value = "2">2. Second prompt title</option>
+                <option value = "2">2. Donor Screening accepted Diseases</option>
                 <option value = "3">3. Third prompt title</option>
                 <option value = "4">4. 4th prompt title</option>
             </select>
@@ -67,13 +67,13 @@
 </main>
 
 <!-- Results Page -->
-<main id="results-page" style="display: none;">
+<main id="results-page" class ="printable" style="display: none;">
     <h3>Latest Donor Assessment Results</h3>
     
     <div id="results-content">
         <button onclick="fetchLatestResults(); showPage('results')">Results</button>
     </div>
-    <button onclick="downloadJSON()">Download Results</button>
+    <button onclick="testPrintPDF()">Download Results</button>
 </main>
 
 <!-- Login Page -->
@@ -195,12 +195,13 @@
             </ul>
         </div>
     </div>
-    <div class="text-center text-white mt-10">
-        <p>Website developed by <a href="https://www.linkedin.com/in/ruslanshamsiev/" class="text-orange-light underline" target="_blank">Ruslan Shamsiev</a></p>
-    </div>
+
 </div>
 <script>
-results-content
+
+function testPrintPDF() {
+        window.print();
+    }
 	function showResultDetails(idElement) {
 		const results = document.querySelectorAll('div[criterion-result]');
 		results.forEach(result => {
