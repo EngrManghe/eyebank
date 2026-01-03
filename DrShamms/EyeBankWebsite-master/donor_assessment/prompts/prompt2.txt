@@ -6,63 +6,76 @@ previous
 the structure should be exactly the same:
 
 {
-  "DonorReferralSummary": {
-    "PatientName": "Christopher Rassenfoss",
-    "Age": 65,
-    "Sex": "Male",
-    "Hospital": "Mercy Memorial Center Perrysburg",
-    "AdmissionDiagnosis": "distended stomach",
-    "MedicalHistory": [
-      "glioblastoma (diagnosed 2017)",
-      "hypertension",
-      "seizures",
-      "hyperlipidemia",
-      "cataracts with surgery",
-      "developmentally delayed",
-      "autism",
-      "blind in left eye"
-    ],
-    "CauseOfDeath": "Asystole",
-    "ReferralDate": "2025-08-10"
-  },
-  "ScreeningEvaluation": {
-    "MatchedConditions": [
-      {
-        "Condition": "Glioblastoma",
-        "Category": "CNS Disease (Brain Tumor)",
-        "MatchedAgainst": "History of glioblastoma (dx in 2017)",
-        "Result": "Not Accepted"
-      }
-    ],
-    "FinalDecision": "Not Accepted",
-    "Reason": "Donor has a history of CNS malignancy (glioblastoma), which is a rule-out condition per donor screening guidelines."
-  },
-  "DonorExclusionCriteria": {
-    "RuleOutConditions": [
-      "Amyotrophic Lateral Sclerosis (ALS)",
-      "Lou Gehrig’s Disease",
-      "Alzheimer’s",
-      "Babesiosis",
-      "Batten Disease"
-    ],
-    "FlagForFurtherInvestigation": [
-      "Cardiomyopathy",
-      "Chicken Pox",
-      "Cirrhosis"
-    ]
-  },
-  "DonorScreeningTable": [
-    {
-      "Condition": "Amyotrophic Lateral Sclerosis (ALS)",
-      "ICD-10 Code": "G12.21",
-      "Clinical Category": "Neurology",
-      "Screening Action": "Rule Out",
-      "ResultIfMatched": "Not Accepted"
+  "DonorScreeningCase": {
+    "Source": "Latest Donor Assessment Results",
+    "medical_records": {
+      "PatientName": "Becky K. Carter",
+      "DOB": "1954-04-05",
+      "MRN": "099-77-37-48",
+      "AdmissionDate": "2025-10-02",
+      "DischargeDate": "2025-10-06",
+      "EncounterDate": "2025-10-02",
+      "ChiefComplaint": "Generalized weakness",
+      "MedicalHistory": [
+        "Acute respiratory failure with hypoxia",
+        "CVA in 2020",
+        "Atrial fibrillation",
+        "Anxiety",
+        "Depression",
+        "Arthritis",
+        "Type 2 diabetes on insulin",
+        "COPD",
+        "GERD",
+        "Hyperlipidemia",
+        "Hypertension",
+        "Hypothyroidism",
+        "Sleep apnea",
+        "Cirrhosis",
+        "Cholangiocarcinoma status post Y90 therapy",
+        "Mild cognitive impairment",
+        "Chronic grade 1 diastolic heart failure"
+      ]
+    },
+    "sepsis": {
+      "VitalSigns": {
+        "Temp_F": 98.2,
+        "BP": "106/64",
+        "Pulse": 194,
+        "RespiratoryRate": 16,
+        "SpO2_percent": 85
+      },
+      "Labs": {
+        "WBC": 26.5,
+        "Hemoglobin": 7.8,
+        "Glucose": 136,
+        "Potassium": 3.9,
+        "INR": 2.3,
+        "Procalcitonin": 0.38
+      },
+      "Diagnosis": "Multifocal pneumonia, acute hypoxic respiratory failure, possible sepsis",
+      "Management": [
+        "Initiated broad-spectrum antibiotics",
+        "Fluid resuscitation",
+        "Monitoring of vital signs and laboratory values"
+      ]
+    },
+    "blood_transfusion": {
+      "TransfusionDate": "2025-10-02",
+      "UnitsTransfused": 2,
+      "ReasonForTransfusion": "Severe anemia with hemoglobin of 5.8, requiring correction",
+      "PostTransfusionHemoglobin": 8.1,
+      "TransfusionReaction": "None reported"
+    },
+
+    "AutoScreening": {
+      "DonorExclusionCriteriaFile": "donor_exclusion_criteria_v1.json",
+      "MatchedRuleOutConditions": [],
+      "MatchedFlagForFurtherInvestigationConditions": [
+        "Cirrhosis"
+      ],
+      "Decision": "Not Acceptable – Needs Further Investigation",
+      "DecisionCategory": "NeedsFurtherInvestigation",
+      "Explanation": "Cirrhosis is present in the medical history and is listed under FlagForFurtherInvestigation conditions."
     }
-  ],
-  "ScreeningLogic": {
-    "Description": "If any condition from this list appears in a donor's referral, result is 'Not Accepted'. If none are matched, then the donor is 'Accepted'.",
-    "DefaultIfNoMatch": "Accepted"
   }
 }
-
