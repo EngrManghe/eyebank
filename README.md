@@ -1,71 +1,164 @@
-11.11.2024
-Step #1
-Ruslan analyzed crappy plan by Fidel (that new plan wasn't perfect because at least Kubernetes in that architecture cost too much human resources)
-Fidel also worried abour Ruslan's architecture with Django Framework
-We decided that we rebuild our architecture, but at first we need to make our first step anyway
+# EyeBankWebsite – A Platform for Retrieving AI-Analyzed Medical Records
 
-We need to understand how to communicate with ChatGPT4
-we don't need to spent our time to build another architecture right now
+## Project Overview
 
-Step #1
-We returned to our previous script
+EyeBankWebsite is a web-based application developed using Django that enables users to upload donor medical records and retrieve AI-analyzed data for assessment. Leveraging the power of ChatGPT, the platform helps medical professionals streamline the donor evaluation process by extracting and interpreting critical medical information.
 
-Step #2
-We created our common GitHub Repositor, where both Fidel and Ruslan can push any changes they want, and it is good starting point with cimmuncation (i don't understand why we didn't do it yet)
+## Key Features
 
-Step #3
-We finally get to the same problem where we was before
-We need to solve this issue while executing our test.py script
-16.11.2024 finally we did it
+### 1. Donor Record Upload
+- Currently supports only .pdf files, with plans for future support of additional file formats.
+- Secure and efficient file handling to comply with medical data regulations (e.g., HIPAA).
 
-Step #4
-create cli command which will send the file in the local direction to ChatGPT and then return the response in structured way
-this is how i expect it will work
+### 2. AI-Based Medical Data Analysis
+- Uploaded medical records are analyzed by ChatGPT.  
+- Extracted information is structured and presented for easy review.  
+- Focuses on key medical aspects such as:  
+  - Electronic Medical Records (EMR)  
+  - Sepsis Detection  
+  - Blood Transfusion Compatibility
+- PDF Handling: The platform processes uploaded .pdf files using a combination of Python libraries like pdfplumber to extract text and medical information for further analysis.
 
-python script.py path_to_pdf_file path_to_the_file_where_promt_stored
-exampl
-python script.py D:\\FidelLocalPc\\folder\folder\Document.pdf promt.txt
-finally we did it
-We observed that our prompt consume much more than simple Hello's request
-previously we've spent 
-13 tokens for request
-9 tokens for response
+### 3. Prompt-Based Question Retrieval
+- Users select predefined prompts stored in `promptX.txt` files.  
+- The system retrieves and displays AI-analyzed medical responses based on selected prompts.  
 
-now we spend
-47008 tokens for request(it is because we upload huge pdf files)
-586 tokens for response(here we see ~x65 cost difference with just simple request processing - that is very interesting)
+### 4. User-Friendly Interface
+- Built with HTML, CSS, and JavaScript for a seamless experience.  
+- Simple navigation for quick access to analyzed data.  
 
-Now we have very simple prototype, we need to check our balance each time when we send any request (i think it will be better to make request/response more compact, so we will spend less $ for processing and less memory for keeping this data into our database)
+## Technology Stack
 
-Step #5
-We need to rebuild our architecture(next Saturday will chech this)
-...
-Here i see 2 solutions:
-1) Make everything from the scratch (less efforts in short time (sorry correct me if I wrong), but much costly to maintain the final system)
--This option also good , but difficult to maintain
+- **Backend:** Django (Python)  
+- **Frontend:** HTML, CSS, JavaScript  
+- **Database:** SQLite(currently), PostgreSQL(preferred)
+- **File Handling:** PDF processing for medical record extraction  
 
-2) Use Django framework (more efforts in short time, easier to maintain in the future) - I like this option 
-Yes that framework allow to build website much more easier with whole bunch of functionalities
+## Project Objective
 
-Yes I can start, but i thinkwill be better for me to continue that course
-from 20'th December i will fe on vacation till 8th January
+EyeBankWebsite enhances the donor assessment process by enabling faster analysis of large volumes of medical data, helping medical professionals make informed decisions efficiently.
 
-Yes i think i can continute that course and in parallel we can start that project with simple html template to build the pages and connect with PostgreSQL database where all our data will be stored
+## Architecture
+![Architecture](_project_description/Architecture.jpg)
 
-We need to think...
-Go meeting on 21st December, or 22nd
+### Frontend (Browser)
+- Users interact with the application via a web interface.
+- Actions (clicks) trigger JavaScript, which sends REST (GET/POST) requests to the backend.
+- The browser parses responses and updates the DOM accordingly.
 
-before that day
-1) Check our promt maybe you have some idea how to make it more compact
-2) Download Beyond and Compare app (very easy soft)
+### Backend (Django on Linux)
+- **WSGIConfig** bridges the web server and Django.
 
-Step #6
-We build 2 pages /home and /result
+#### Django Core Components:
+- **Routing (urls.py)**: Handles incoming requests and maps them to views.
+- **Views (views.py)**: Processes logic and interacts with models/forms.
+- **Templates**: Renders dynamic HTML responses.
+- **Forms (forms.py)**: Handles user input validation.
+- **Models (models.py)**: Defines database schema.
+- **Database (SQLite)**: Stores application data.
+- **Admin Panel (admin.py)**: Provides a web-based interface for managing data.
+- **Shell**: Command-line access for executing Django scripts.
 
-Step #7
-We need to make corrections on our design little bit
-25/01
+### External AI Integration
+- Django communicates with an **API Layer** that connects to ChatGPT.
+- A **contingency plan** routes AI requests to an alternative SomeAI Tool if ChatGPT is unavailable.
 
-Step #8
-Connect FrontEnd with BackEnd and Deploy into PythonAnywhere (where we already create an account and have an access to the machine)
-We will represent our project there
+## Architectural Pattern Classification
+
+In Django, the architecture follows a Model-View-Controller (MVC) pattern, which is slightly adapted to the Model-Template-View (MTV) pattern. Here's how the components align with the MVC pattern:
+![MVC](_project_description/MVC.gif)
+### Model
+- The **Model** represents the database structure and business logic.
+- It defines the data schema (what data will be stored in the database) and provides methods for data manipulation.
+- In Django, the **Model** is defined in `models.py`.
+
+### View
+- The **View** is responsible for processing the business logic and interacting with the model.
+- In Django, the **View** handles incoming HTTP requests, interacts with models, and returns the appropriate response.
+- Views are defined in `views.py`.
+
+### Controller
+- In the Django MVC pattern, the **Controller** is somewhat implicit, as the framework handles much of the routing logic.
+- The controller is essentially the mechanism that takes the request and determines which view to call and which model to interact with.
+
+### Template
+- The **Template** is responsible for rendering the UI and presenting the data to the user.
+- Django separates the UI logic (HTML, CSS, JavaScript) from the business logic, with templates stored in the **Templates** folder.
+
+### Hybrid Architecture with AI Integration
+The AI API layer adds flexibility, enabling EyeBankWebsite to incorporate cutting-edge medical analysis capabilities, such as detecting sepsis or assessing blood transfusion compatibility, making it scalable to future AI advancements.
+
+## Token Consumption by ChatGPT
+
+When interacting with ChatGPT, it’s important to understand how tokens are consumed during processing. Tokens are units of text that the model uses to understand and generate language. Both the input (what you send) and the output (what the model returns) consume tokens.
+
+For larger documents, token limits can be managed by chunking data or summarizing large inputs before sending them to ChatGPT for analysis. This ensures efficient usage of tokens and prevents hitting API limits.
+
+### Token Breakdown for Simple Text
+For a simple text, like "Hello", the token consumption is minimal:
+![Architecture](_project_description/AIConsumptionSimpleHello.jpg)
+- **Input**: 13 tokens
+- **Output**: 9 tokens
+
+### Token Breakdown for Large Inputs (e.g., PDF Files)
+When processing larger inputs, such as extracting text from PDF files, the token count can increase significantly:
+![Architecture](_project_description/AIConsumptionPDFiles.jpg)
+- **Input**: 47,008 tokens (for a large PDF)
+- **Output**: 586 tokens
+
+This token consumption is influenced by factors such as the size of the input, the complexity of the content, and how much output is generated. For large files or complex data, token consumption can grow, which may impact costs and performance.
+
+### Token Limits
+Each API call to ChatGPT has a token limit, which is the maximum number of tokens that can be processed in a single request (input + output). It’s essential to keep this in mind when submitting large documents or requests for AI processing.
+
+## File Structure
+
+| File/Folder            | Description |
+|------------------------|-------------|
+| **EyeBankWebsite/**    | Root directory of the Django project. |
+| ├── **.gitignore**     | Specifies files and folders to ignore in version control. |
+| ├── **config.yaml**    | Configuration file for project settings. |
+| ├── **db.sqlite3**     | SQLite database file (used for local development). |
+| ├── **manage.py**      | Django management script for running commands. |
+| ├── **README.md**      | Documentation file describing the project. |
+| ├── **requirements.txt** | Lists required Python dependencies. |
+| ├── **_project_description** | File containing a brief project overview. |
+| ├── **donor_assessment/** | Django app for donor assessment functionality. |
+| │   ├── **__init__.py** | Marks the directory as a Python package. |
+| │   ├── **admin.py** | Admin panel configuration. |
+| │   ├── **apps.py** | App configuration file. |
+| │   ├── **forms.py** | Django forms for handling user input. |
+| │   ├── **models.py** | Database models for donor assessment. |
+| │   ├── **tests.py** | Unit tests for the donor assessment app. |
+| │   ├── **urls.py** | URL routing configuration for the app. |
+| │   ├── **views.py** | Contains view functions to handle requests. |
+| │   ├── **migrations/** | Database migration files. |
+| │   │   ├── **__init__.py** | Marks the directory as a Python package. |
+| │   │   ├── **0001_initial.py** | Initial database schema migration. |
+| │   ├── **prompts/** | Folder containing text prompts. |
+| │   │   ├── **prompt1.txt** - **prompt4.txt** | Text files containing predefined prompts which send to AI with .pdf file |
+| │   ├── **static/** | Folder for static assets like CSS and images. |
+| │   │   ├── **css/** | Stylesheets for the website. |
+| │   │   │   ├── **main.css** | Main CSS file for styling. |
+| │   │   │   ├── **output.css** | Generated output from a CSS preprocessor (if used). |
+| │   │   ├── **images/** | Stores image assets. |
+| │   │   │   ├── **ebaa-accredited.webp** | Accreditation badge image. |
+| │   │   │   ├── **lions_eye_bank_logo.png** | Logo of the Eye Bank. |
+| │   ├── **templates/** | Contains HTML templates for the app. |
+| │   │   ├── **home.html** | Main homepage template. |
+| │   ├── **__pycache__/** | Compiled Python bytecode files for optimization. |
+| ├── **EyeBankWebsite/** | Main Django project folder. |
+| │   ├── **__init__.py** | Marks the directory as a Python package. |
+| │   ├── **asgi.py** | Entry point for ASGI servers. |
+| │   ├── **settings.py** | Main project configuration file. |
+| │   ├── **urls.py** | URL routing configuration for the project. |
+| │   ├── **wsgi.py** | Entry point for WSGI servers. |
+| │   ├── **__pycache__/** | Compiled Python bytecode files. |
+| ├── **staticfiles/** | Collects all static files when `collectstatic` is run. |
+| │   ├── **css/** | Stores collected CSS files. |
+| │   ├── **images/** | Stores collected images. |
+| │   ├── **admin/** | Static files for Django's admin interface. |
+| │   │   ├── **css/**, **fonts/**, **img/**, **js/**, **vendor/** | Various assets for Django's admin panel. |
+| ├── **__pycache__/** | Cached Python files for faster execution. |
+
+
